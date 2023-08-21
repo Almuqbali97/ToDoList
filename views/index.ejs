@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo-list</title>
+    <link rel="stylesheet" href="/styles/styles.css">
+</head>
+    <body>
+        <div class="container">
+            <h1 class="date-Title"><%= dateToday %></h1>
+            <% if(listTitle != "Main List") { %>
+            <h1 class="date-Title"><%= listTitle %></h1>
+            <% } %>
+            <div class="to-do-items">
+                <!-- for each is alternative to normal for loop and easier to read -->
+                <% locals.ToDoItems.forEach(item => { %>                                                        
+                    <form class="item" action="/delete-item" method="post">  <!-- iadded this form around the items creatder to detect when checkbox clicked-->
+                        <div class="item">
+                            <!-- to make the form submit when the checkbox is checked, we add in plain js
+                            onChange = "this.form.sumbit()" -->
+                            <input type="checkbox" name="checkbox" value="<%=item._id %>" onChange = "this.form.submit()">
+                                <p><%=item.toDoItem%></p> <!-- toDoItem is from the database collection -->
+                        </div>
+                        <!-- In order to pass the list name when an item is submiited, we need to make an input to pass the listTitle
+                        but we dont want this input to be see, so we can use the hidden input type -->
+                        <input type="hidden" name="listName" value="<%=listTitle%>">
+                    </form>
+                    <% }); %>
+
+                <form class=" item-submit-form" action="/add-item" method="post">
+                    <input class="new-item" type="text" placeholder="New-item" name="newItem" autocomplete="off" required autofocus>
+                    <button class="add-button" type="submit" name="submitButton" value="<%=listTitle%>" > + </button>
+                </form>
+            </div>  
+        </div>
+    </body>
+</html>
