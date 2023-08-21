@@ -6,7 +6,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 const app = express(); // using express frame work for the backend
-const port = 10000; // the port that will be used
+const port = 0.0.0.0; // the port that will be used
 // const toDoListDBUrl = "mongodb://localhost:27017/toDoListDB-test"; //db nmae (toDoListDB-test)\\ local connection
 const toDoListDBUrl = process.env.MONGO_CONNECT_URL;
    
